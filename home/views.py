@@ -23,10 +23,7 @@ def addclassroom(request):
     #return HttpResponse("this is my home page")
     return render(request, 'addclassroom.html',context)  
 
-def theory(request):
-    allclass=classroom.objects.all()
-    context={'addclass':allclass}
-    return render(request,'theory.html',context)
+
 
 def addinstructor(request):
     context={'success':False}
@@ -36,10 +33,6 @@ def addinstructor(request):
        designation = request.POST.get('designation')
        email = request.POST.get('email')
        phone = request.POST.get('phone')
-        
-       
-       
-
        #print(name, email,phone,desc)
        ins =instructor(instructorid=instructorid,name=name,designation=designation, email=email, phone=phone )
        ins.save()
@@ -53,6 +46,17 @@ def addinstructor(request):
 def addsubjects(request):
     return render(request,'addsubjects.html')
 
+
+#allotment section    
+
+def theory(request):
+    return render(request,'theory.html')    
+
 def room(request):
-    return render(request,'room.html')    
+    allclass=classroom.objects.all()
+    context={'addclass':allclass}
+    return render(request,'room.html',context)    
+
+def practical(request):
+    return render(request,'practical.html')    
 
