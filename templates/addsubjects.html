@@ -112,6 +112,34 @@
           </form>
       </div>
 
+      <div class="container my-5">
+        <h5>SUBJECTS LISTS</h5>
+        <table class="table my-5">
+          <thead>
+            <tr>
+                <th scope="col">#</th>
+              <th scope="col">Subject-Code</th>
+              <th scope="col">Subject-Name</th>
+              <th scope="col">Subject-Type</th>
+              <th scope="col">Semester</th>
+              
+            </tr>
+          </thead>
+
+      {% for subjects in addsubjects %}
+      <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ subjects.code }}</td>
+          <td>{{ subjects.name }}</td>
+          <td>{{ subjects.type }}</td>
+          <td>{{ subjects.sem }}</td>
+          
+          
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
 
             
 
