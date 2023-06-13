@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 from home.models import classroom
+from home.models import instructor
 from .models import classroom
 
 
@@ -26,7 +27,26 @@ def theory(request):
     return render(request,'theory.html')
 
 def addinstructor(request):
-    return render(request,'addinstructor.html')
+    context={'success':False}
+    if request.method=="POST":
+       instructorid = request.POST.get('instructorid')
+       name = request.POST.get('name')
+       designation = request.POST.get('designation')
+       email = request.POST.get('email')
+       phone = request.POST.get('phone')
+        
+       
+       
+
+       #print(name, email,phone,desc)
+       ins =instructor(instructorid=instructorid,name=name,designation=designation, email=email, phone=phone )
+       ins.save()
+       context={'success':True}
+      
+    print("The data had been return to the db")
+       
+    #return HttpResponse("this is my contact page")
+    return render(request, 'addinstructor.html')
 
 def addsubjects(request):
     return render(request,'addsubjects.html')
