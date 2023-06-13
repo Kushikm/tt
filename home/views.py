@@ -43,9 +43,10 @@ def addinstructor(request):
         
         ins = instructor(instructorid=instructorid, name=name, designation=designation, email=email, phone=phone)
         ins.save()
+        context['success'] = True
         
     allinst = instructor.objects.all()
-    context = {'success': True, 'addinstructor': allinst}
+    context['addinstructor'] = allinst
     return render(request, 'addinstructor.html', context)
 
 
