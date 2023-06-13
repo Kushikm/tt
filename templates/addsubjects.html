@@ -65,6 +65,84 @@
         </form>
       </div> 
     </nav>
+    <div class= "container my-3">
+        <h2 class="text-center">Add Subjects </h2> 
+
+        <form action="/addsubjects" method="post">
+            {%csrf_token%}
+            <div class="container">
+              
+            </div>
+            <div class="form-group">
+              <label for="name">subject code</label>
+              <input type="text" class="form-control" id="code" name="instructorid" placeholder="4rmat3">
+            </div>   
+
+            
+            <div class="form-group">
+              <label for="name">Subject Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="name">
+            </div>
+
+            <div class="form-group">
+                <label for="designation">Course Type</label>
+                <select class="form-control form-control-sm" name="type" >
+                    <option>Theory</option>
+                    <option>Practical</option>
+                    
+                </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="designation">Semester</label>
+                    <select class="form-control form-control-sm" name="sem" >
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+
+                        
+                    </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+
+      <div class="container my-5">
+        <h5>SUBJECTS LISTS</h5>
+        <table class="table my-5">
+          <thead>
+            <tr>
+                <th scope="col">#</th>
+              <th scope="col">Subject-Code</th>
+              <th scope="col">Subject-Name</th>
+              <th scope="col">Subject-Type</th>
+              <th scope="col">Semester</th>
+              
+            </tr>
+          </thead>
+
+      {% for subjects in addsubjects %}
+      <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ subjects.code }}</td>
+          <td>{{ subjects.name }}</td>
+          <td>{{ subjects.type }}</td>
+          <td>{{ subjects.sem }}</td>
+          
+          
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+
+            
+
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
