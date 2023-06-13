@@ -25,5 +25,8 @@ def addclassroom(request):
 def theory(request):
     return render(request,'theory.html')
 
+def addinstructor(request):
+    return render(request,'addinstructor.html')
+
     
 
