@@ -23,6 +23,16 @@ def addclassroom(request):
     #return HttpResponse("this is my home page")
     return render(request, 'addclassroom.html',context)  
 
+#delete classroom
+def delete_classroom(request, classroom_id):
+    if request.method == 'POST':
+        rooms = classroom.objects.get(id=classroom_id)
+        rooms.delete()
+        return redirect('addclassroom')  # Redirect to the desired page after deletion
+    else:
+        # Handle GET request if necessary
+       pass   
+
 
 
 def addinstructor(request):
