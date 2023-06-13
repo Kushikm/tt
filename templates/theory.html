@@ -56,8 +56,8 @@
             Allotment          </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/theory">Theory Classes</a>
-            <a class="dropdown-item" href="#">Practical Classes</a>
-            <a class="dropdown-item" href="#">Classroom</a>  
+            <a class="dropdown-item" href="/practical">Practical Classes</a>
+            <a class="dropdown-item" href="/room">Classroom</a>  
         </li>
       
         </ul>
@@ -69,7 +69,10 @@
     
        <div class="container my-3" style="width:400px">
         <select class="form-control form-control-sm"style="margin-top:70px" >
-          <option>Select teacher</option>
+          <option disabled selected>Select Teacher</option>
+          {% for  cn in addclass  %}
+          <option >{{cn.classnum}}</option>
+          {% endfor %}
         </select>
         <select class="form-control form-control-sm " style="margin-top:30px">
           <option>Select course</option>
