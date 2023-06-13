@@ -23,7 +23,9 @@ def addclassroom(request):
     return render(request, 'addclassroom.html',context)  
 
 def theory(request):
-    return render(request,'theory.html')
+    allclass=classroom.objects.all()
+    context={'addclass':allclass}
+    return render(request,'theory.html',context)
 
 def addinstructor(request):
     return render(request,'addinstructor.html')
@@ -31,5 +33,6 @@ def addinstructor(request):
 def addsubjects(request):
     return render(request,'addsubjects.html')
 
-    
+def room(request):
+    return render(request,'room.html')    
 

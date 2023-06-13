@@ -14,4 +14,5 @@ urlpatterns = [
     path('addinstructor',views.addinstructor,name="addinstructor"),
     path('addsubjects',views.addsubjects,name="addsubjects"),
     path('theory',views.theory,name="theory"),
+    path('room',views.room,name="room"),
 ]
