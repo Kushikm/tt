@@ -65,6 +65,15 @@
         </form>
       </div> 
     </nav>
+    {% if success %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success: </strong>One Instructor Added 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+
     <div class= "container my-3">
         <h2 class="text-center">Add Instructor </h2> 
 
@@ -118,6 +127,7 @@
         <table class="table my-5">
           <thead>
             <tr>
+              <th scope="col">#</th>
               <th scope="col">Id</th>
               <th scope="col">Name</th>
               <th scope="col">Designation</th>

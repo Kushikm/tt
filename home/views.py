@@ -17,13 +17,22 @@ def addclassroom(request):
     return render(request, 'addclassroom.html', context)
   
 
+#delete classroom
+def delete_classroom(request, classroom_id):
+    if request.method == 'POST':
+        rooms = classroom.objects.get(id=classroom_id)
+        rooms.delete()
+        return redirect('addclassroom')  # Redirect to the desired page after deletion
+    else:
+        # Handle GET request if necessary
+       pass   
+
 
 def theory(request):
     return render(request, 'theory.html')
 
 def addinstructor(request):
     context = {'success': False}
-    allLists = instructor.objects.all()
     
     if request.method == "POST":
         instructorid = request.POST.get('instructorid')
@@ -34,10 +43,10 @@ def addinstructor(request):
         
         ins = instructor(instructorid=instructorid, name=name, designation=designation, email=email, phone=phone)
         ins.save()
+        context['success'] = True
         
-        allLists = instructor.objects.all()
-        context = {'success': True, 'addinstructor': allLists}
-
+    allinst = instructor.objects.all()
+    context['addinstructor'] = allinst
     return render(request, 'addinstructor.html', context)
 
 
