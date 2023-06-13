@@ -9,6 +9,7 @@ from .views import delete_classroom
 
 urlpatterns = [
     
+
     path('home',views.home,name="home"),
     path('',views.home,name="home"),
     path('addclassroom',views.addclassroom,name="addclassroom"),
@@ -20,3 +21,4 @@ urlpatterns = [
     path('room',views.room,name="room"),
      path('practical',views.practical,name="practical"),
 ]
+
