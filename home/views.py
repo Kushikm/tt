@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import classroom, instructor
+from home.models import classroom, instructor, subjects
 
 # Create your views here.
 def home(request):
@@ -50,8 +50,7 @@ def addinstructor(request):
     return render(request, 'addinstructor.html', context)
 
 
-def addsubjects(request):
-    return render(request, 'addsubjects.html')
+
 
 def room(request):
     allclass=classroom.objects.all()
@@ -61,4 +60,20 @@ def room(request):
 def practical(request):
     return render(request,'practical.html')    
 
-
+def addsubjects(request):
+    context = {'success': False}
+    
+    if request.method == "POST":
+        code = request.POST.get('code')
+        name = request.POST.get('name')
+        type = request.POST.get('type')
+        sem = request.POST.get('sem')
+        
+        
+        ins = subjects(code=code, name=name, type=type, sem=sem)
+        ins.save()
+        context['success'] = True
+        
+    allinst = subjects.objects.all()
+    context['addsubjects'] = allinst
+    return render(request, 'addsubjects.html', context)
