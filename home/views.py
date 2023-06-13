@@ -28,5 +28,8 @@ def theory(request):
 def addinstructor(request):
     return render(request,'addinstructor.html')
 
+def addsubjects(request):
+    return render(request,'addsubjects.html')
+
     
 
