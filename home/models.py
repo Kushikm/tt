@@ -17,12 +17,12 @@ class Instructor(models.Model):
 class Subjects(models.Model):
     code = models.CharField(primary_key=True, max_length=10)
     name = models.CharField(max_length=100)
-    type = models.CharField(max_length=20, default='default_value')
+    stype = models.CharField(max_length=20, default='default_value' , null=True)
     sem = models.CharField(max_length=20, default='default_value')
     credits = models.CharField(max_length=20, default='default_value')
 
     def __str__(self):
-        return self.code
+        return self.name
 
 class Classroom(models.Model):
     classnum = models.CharField(max_length=30)
