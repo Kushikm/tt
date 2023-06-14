@@ -87,7 +87,7 @@
       <td>{{ instructor.email }}</td>
       <td>{{ instructor.phone}}</td>
       <td>
-        <form action="/deleteinstructor/{{ instructor.id }}/" method="post">
+        <form action="{% url 'delete-instructor' instructor.instructorid %}" method="post">
           {% csrf_token %}
           <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
         </form>
@@ -95,6 +95,7 @@
       
       </tr>
       {% endfor %}
+    </tbody>
 
         </table>
       </div>

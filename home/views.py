@@ -26,16 +26,16 @@ def delete_classroom(request, classroom_id):
 
 def delete_subjects(request, subjects_id):
     if request.method == 'POST':
-        room = Subjects.objects.get(id=subjects_id)
-        room.delete()
+        subject = Subjects.objects.get(subjectid=subjects_id)
+        subject.delete()
         return redirect('addsubjects')
     else:
         # Handle GET request if necessary
-        pass   
+        pass
 
 def delete_instructor(request, instructor_id):
     if request.method == 'POST':
-        ins = Instructor.objects.get(id=instructor_id)
+        ins =  Instructor.objects.get(instructorid=instructor_id)
         ins.delete()
         return redirect('addinstructor')
     else:
@@ -90,9 +90,10 @@ def addsubjects(request):
         ins.save()
         context['success'] = True
 
-    allinst = Subjects.objects.all()
-    context['addsubjects'] = allinst
+    allsubjects = Subjects.objects.all()
+    context ={'addsubject':allsubjects} 
     return render(request, 'addsubjects.html', context)
+
 
 def room(request):
     allclass = Classroom.objects.all()
