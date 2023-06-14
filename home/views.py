@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import classroom, instructor, subjects
+from home.models import classroom, instructor ,subjects
 
 # Create your views here.
 def home(request):
@@ -37,7 +37,11 @@ def delete_instructor(request, instructor_id):
 
 
 def theory(request):
-    return render(request, 'theory.html')
+    allteach=instructor.objects.all()
+    theory_courses = subjects.objects.filter(type='theory')  # Retrieve theory-type courses
+    context={'addteacher':allteach,
+             'theory_courses':theory_courses}
+    return render(request, 'theory.html',context)
 
 def addinstructor(request):
     context = {'success': False}
@@ -57,17 +61,6 @@ def addinstructor(request):
     context['addinstructor'] = allinst
     return render(request, 'addinstructor.html', context)
 
-
-
-
-def room(request):
-    allclass=classroom.objects.all()
-    context={'addclass':allclass}
-    return render(request,'room.html',context)    
-
-def practical(request):
-    return render(request,'practical.html')    
-
 def addsubjects(request):
     context = {'success': False}
     
@@ -78,13 +71,24 @@ def addsubjects(request):
         sem = request.POST.get('sem')
         
         
-        ins = subjects(code=code, name=name, type=type, sem=sem)
+        ins = instructor(code=code, name=name, type=type, sem=sem)
         ins.save()
         context['success'] = True
         
     allinst = subjects.objects.all()
     context['addsubjects'] = allinst
     return render(request, 'addsubjects.html', context)
+
+
+
+
+def room(request):
+    allclass=classroom.objects.all()
+    context={'addclass':allclass}
+    return render(request,'room.html',context)    
+
+def practical(request):
+    return render(request,'practical.html')  
 
 
     

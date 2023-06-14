@@ -35,12 +35,12 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="/home"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="/addinstructor">AddInstructor</a>
           </li>
           
@@ -48,7 +48,7 @@
             <a class="nav-link" href="/addsubjects">AddSubjects</a>
           </li>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item">
           <a class="nav-link" href="/addclassroom">AddClassroom</a>
         </li>
         <li class="nav-item dropdown">
@@ -65,37 +65,37 @@
         </form>
       </div> 
     </nav>
+
     <div class= "container my-3">
         <h2 class="text-center">Add Subjects </h2> 
 
-        <form action="/addsubjects" method="post">
+        <form action="/addinstructor" method="post">
             {%csrf_token%}
             <div class="container">
               
             </div>
             <div class="form-group">
-              <label for="name">subject code</label>
-              <input type="text" class="form-control" id="code" name="instructorid" placeholder="4rmat3">
+              <label for="name">Subject code</label>
+              <input type="text" class="form-control" id="instructorid" name="code" >
             </div>   
 
             
             <div class="form-group">
               <label for="name">Subject Name</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="name">
+              <input type="text" class="form-control" id="name" name="name" >
             </div>
 
             <div class="form-group">
-                <label for="designation">Course Type</label>
-                <select class="form-control form-control-sm" name="type" >
-                    <option>Theory</option>
+                <label for="designation">Subject type</label>
+                <select class="form-control form-control-sm" name="type">
                     <option>Practical</option>
-                    
+                    <option>Theory</option>
+                   
                 </select>
                 </div>
-
                 <div class="form-group">
                     <label for="designation">Semester</label>
-                    <select class="form-control form-control-sm" name="sem" >
+                    <select class="form-control form-control-sm" name="sem">
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
@@ -103,46 +103,28 @@
                         <option>6</option>
                         <option>7</option>
                         <option>8</option>
-
-                        
+                       
                     </select>
                     </div>
+            
+            
+              
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
       </div>
 
-      <div class="container my-5">
-        <h5>SUBJECTS LISTS</h5>
-        <table class="table my-5">
-          <thead>
-            <tr>
-                <th scope="col">#</th>
-              <th scope="col">Subject-Code</th>
-              <th scope="col">Subject-Name</th>
-              <th scope="col">Subject-Type</th>
-              <th scope="col">Semester</th>
-              
-            </tr>
-          </thead>
+    
+         
+    
 
-      {% for subjects in addsubjects %}
-      <tr>
-          <th scope="row">{{ forloop.counter }}</th>
-          <td>{{ subjects.code }}</td>
-          <td>{{ subjects.name }}</td>
-          <td>{{ subjects.type }}</td>
-          <td>{{ subjects.sem }}</td>
-          
-          
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
-
-
-            
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    
+   
+    
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

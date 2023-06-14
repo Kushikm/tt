@@ -13,19 +13,20 @@ class instructor(models.Model):
 
       def __str__(self):
         return self.name
-         
+      
+class subjects(models.Model):
+      code = models.CharField(primary_key=True,max_length=10)
+      name = models.CharField(max_length=100)
+      type = models.CharField(max_length=10)
+      sem = models.EmailField(max_length=2)
+     
+      def __str__(self):
+        return self.code 
+        
 class classroom(models.Model):
     classnum=models.CharField(max_length=30)
 
     def __str__(self):
         return self.classnum
     
-class subjects(models.Model):
-      code = models.CharField(primary_key=True,max_length=10)
-      name = models.CharField(max_length=100)
-      type = models.CharField(max_length=50)
-      sem = models.CharField(max_length=50)
-       
-      def __str__(self):
-        return self.code    
 
