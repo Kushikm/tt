@@ -1,11 +1,11 @@
 from django.contrib import admin
-from home.models import classroom
-from home.models import subjects
+from home.models import Classroom
+from home.models import Subjects
 
-from home.models import instructor
+from home.models import Instructor
 # Register your models here.
 
 
-admin.site.register(classroom)
-admin.site.register(instructor)
-admin.site.register(subjects)
+admin.site.register(Classroom)
+admin.site.register(Instructor)
+admin.site.register(Subjects)

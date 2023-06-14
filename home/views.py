@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from home.models import classroom, instructor ,subjects
+from home.models import Classroom, Instructor, Subjects
 
-# Create your views here.
 def home(request):
     return render(request, 'home.html')
 
@@ -9,86 +8,96 @@ def addclassroom(request):
     context = {'success': False}
     if request.method == "POST":
         title = request.POST['title']
-        ins = classroom(classnum=title)
+        ins = Classroom(classnum=title)
         ins.save()
         context['success'] = True
-    allLists = classroom.objects.all()
+    allLists = Classroom.objects.all()
     context['addclassroom'] = allLists
     return render(request, 'addclassroom.html', context)
-  
 
-#delete classroom
 def delete_classroom(request, classroom_id):
     if request.method == 'POST':
-        rooms = classroom.objects.get(id=classroom_id)
-        rooms.delete()
-        return redirect('addclassroom')  # Redirect to the desired page after deletion
+        room = Classroom.objects.get(id=classroom_id)
+        room.delete()
+        return redirect('addclassroom')
     else:
         # Handle GET request if necessary
-       pass   
+        pass
+
+def delete_subjects(request, subjects_id):
+    if request.method == 'POST':
+        room = Subjects.objects.get(id=subjects_id)
+        room.delete()
+        return redirect('addsubjects')
+    else:
+        # Handle GET request if necessary
+        pass   
+
 def delete_instructor(request, instructor_id):
     if request.method == 'POST':
-        ins1  = instructor.objects.get(id=instructor_id)
-        ins1.delete()
-        return redirect('addclassroom')  # Redirect to the desired page after deletion
+        ins = Instructor.objects.get(id=instructor_id)
+        ins.delete()
+        return redirect('addinstructor')
     else:
         # Handle GET request if necessary
-       pass       
+        pass
 
 
 def theory(request):
-    allteach=instructor.objects.all()
-    theory_courses = subjects.objects.filter(type='theory')  # Retrieve theory-type courses
-    context={'addteacher':allteach,
-             'theory_courses':theory_courses}
-    return render(request, 'theory.html',context)
+    allteach = Instructor.objects.all()
+    theory_courses = Subjects.objects.filter(type='theory')
+    context = {
+        'addteacher': allteach,
+        'theory_courses': theory_courses
+    }
+    return render(request, 'theory.html', context)
 
 def addinstructor(request):
     context = {'success': False}
-    
+
     if request.method == "POST":
         instructorid = request.POST.get('instructorid')
         name = request.POST.get('name')
         designation = request.POST.get('designation')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
-        
-        ins = instructor(instructorid=instructorid, name=name, designation=designation, email=email, phone=phone)
+
+        ins = Instructor(
+            instructorid=instructorid,
+            name=name,
+            designation=designation,
+            email=email,
+            phone=phone
+        )
         ins.save()
         context['success'] = True
-        
-    allinst = instructor.objects.all()
+
+    allinst = Instructor.objects.all()
     context['addinstructor'] = allinst
     return render(request, 'addinstructor.html', context)
 
 def addsubjects(request):
     context = {'success': False}
-    
+
     if request.method == "POST":
         code = request.POST.get('code')
         name = request.POST.get('name')
         type = request.POST.get('type')
         sem = request.POST.get('sem')
-        
-        
-        ins = instructor(code=code, name=name, type=type, sem=sem)
+        credits = request.POST.get('credits')
+
+        ins = Subjects(code=code, name=name, type=type, sem=sem, credits=credits)
         ins.save()
         context['success'] = True
-        
-    allinst = subjects.objects.all()
+
+    allinst = Subjects.objects.all()
     context['addsubjects'] = allinst
     return render(request, 'addsubjects.html', context)
 
-
-
-
 def room(request):
-    allclass=classroom.objects.all()
-    context={'addclass':allclass}
-    return render(request,'room.html',context)    
+    allclass = Classroom.objects.all()
+    context = {'addclass': allclass}
+    return render(request, 'room.html', context)
 
 def practical(request):
-    return render(request,'practical.html')  
-
-
-    
+    return render(request, 'practical.html')

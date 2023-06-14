@@ -41,7 +41,7 @@
             >
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/addinstructor">AddInstructor</a>
+            <a class="nav-link" href="addinstructor/">AddInstructor</a>
           </li>
           
           <li class="nav-item">
@@ -65,12 +65,21 @@
         </form>
       </div> 
     </nav>
-    
+    {% if success %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success: </strong>One Instructor Added 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+
 
     <div class= "container my-3">
         <h2 class="text-center">Add Instructor </h2> 
 
-        <form action="/addinstructor" method="post">
+        <form action="" method="post">
+
             {%csrf_token%}
             <div class="container">
               
@@ -139,10 +148,11 @@
       <td>{{ instructor.phone}}</td>
       <td>
         <form action="/deleteinstructor/{{ instructor.id }}/" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
-          </form>
-        </td>
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
+        </form>
+      </td>
+      
       </tr>
       {% endfor %}
 
