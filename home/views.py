@@ -26,6 +26,14 @@ def delete_classroom(request, classroom_id):
     else:
         # Handle GET request if necessary
        pass   
+def delete_instructor(request, instructor_id):
+    if request.method == 'POST':
+        ins1  = instructor.objects.get(id=instructor_id)
+        ins1.delete()
+        return redirect('addclassroom')  # Redirect to the desired page after deletion
+    else:
+        # Handle GET request if necessary
+       pass       
 
 
 def theory(request):
@@ -77,3 +85,6 @@ def addsubjects(request):
     allinst = subjects.objects.all()
     context['addsubjects'] = allinst
     return render(request, 'addsubjects.html', context)
+
+
+    

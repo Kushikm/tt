@@ -130,19 +130,26 @@
           </thead>
 
           {% for instructor in addinstructor %}
-          <tr>
-              <th scope="row">{{ forloop.counter }}</th>
-              <td>{{ instructor.instructorid }}</td>
-              <td>{{ instructor.name }}</td>
-              <td>{{ instructor.designation}}</td>
-              <td>{{ instructor.email }}</td>
-              <td>{{ instructor.phone}}</td>
-              
-              
-          </tr>
-          {% endfor %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ instructor.instructorid }}</td>
+      <td>{{ instructor.name }}</td>
+      <td>{{ instructor.designation}}</td>
+      <td>{{ instructor.email }}</td>
+      <td>{{ instructor.phone}}</td>
+      <td>
+        <form action="/deleteinstructor/{{ instructor.id }}/" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
         </table>
       </div>
+
+
+      
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
