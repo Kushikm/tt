@@ -84,34 +84,37 @@
                 <th scope="col">#</th>
                 <th scope="col">Subject code</th>
                 <th scope="col">Subjcet name</th>
-                <th scope="col">Subject type</th>
+                <th scope="col">Subject stype</th>
                 <th scope="col">Semester</th>
                 <th scope="col">Credits</th>
                 <th scope="col">Actions</th> 
                 
               </tr>
             </thead>
-            <div> 
-                <tbody>
-                    {% for subject in addsubjects %}
-                    <tr>
-                      <th scope="row">{{ forloop.counter }}</th>
-                      <td>{{ subject.code }}</td>
-                      <td>{{ subject.name }}</td>
-                      <td>{{ subject.stype }}</td>
-                      <td>{{ subject.sem }}</td>
-                      <td>{{ subject.credits }}</td>
-                      <td>
-                        <form action="" method="post">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
-                        </form>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
+            <tbody>
+                {% for subjects in addsubjects %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ subjects.code }}</td>
+            <td>{{ subjects.name }}</td>
+            <td>{{ subjects.stype}}</td>
+            <td>{{ subjects.sem }}</td>
+            <td>{{ subjects.credits}}</td>
+            <td>
+              <form action="{% url 'delete-subjects' subjects.code %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
+              </form>
+            </td>
+            
+            </tr>
+            {% endfor %}
+            
+                
+                 </tbody>
+                </table>
                   
-                </div>    
+            </div>    
 
     
          

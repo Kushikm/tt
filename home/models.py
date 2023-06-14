@@ -7,7 +7,7 @@ from django.db import models
 class Instructor(models.Model):
     instructorid = models.CharField(primary_key=True, max_length=10)
     name = models.CharField(max_length=100)
-    designation = models.CharField(max_length=20, default='default_value')
+    designation = models.CharField(max_length=20, default='professor')
     email = models.EmailField()
     phone = models.CharField(max_length=15)
 
@@ -17,9 +17,9 @@ class Instructor(models.Model):
 class Subjects(models.Model):
     code = models.CharField(primary_key=True, max_length=10)
     name = models.CharField(max_length=100)
-    stype = models.CharField(max_length=20, default='default_value' , null=True)
-    sem = models.CharField(max_length=20, default='default_value')
-    credits = models.CharField(max_length=20, default='default_value')
+    stype = models.CharField(max_length=20, default='2' , null=True)
+    sem = models.CharField(max_length=20, default='3')
+    credits = models.CharField(max_length=20, default='1')
 
     def __str__(self):
         return self.name

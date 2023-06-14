@@ -40,16 +40,17 @@ def addsubjects(request):
         context['success'] = True
 
     allsubjects = Subjects.objects.all()
-    context ={'addsubjects':allsubjects} 
+    context['addsubjects'] = allsubjects
     return render(request, 'addsubjects.html', context)
 
 
-def delete_subjects(request, pk):
-    subject = Subjects.objects.filter(pk=pk)
+def delete_subjects(request, subjects_code):
     if request.method == 'POST':
-        subject.delete()
-        return redirect('addsubjects')
-    
+      ins = Subjects.objects.get(code=subjects_code)
+      ins.delete()
+      return redirect('addsubjects')
+    else:
+         pass
 
 def addinstructor(request):
     context = {'success': False}
@@ -87,10 +88,10 @@ def delete_instructor(request, instructor_id):
 
 def theory(request):
     allteach = Instructor.objects.all()
-    theory_courses = Subjects.objects.filter(stype='theory')
+    theory_courses = Subjects.objects.filter(stype='Theory')
     context = {
         'addteacher': allteach,
-        'theory_courses': theory_courses
+        'theorycourses': theory_courses,
     }
     return render(request, 'theory.html', context)
 
