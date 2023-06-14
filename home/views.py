@@ -24,33 +24,32 @@ def delete_classroom(request, classroom_id):
         # Handle GET request if necessary
         pass
 
-def delete_subjects(request, subjects_id):
+
+def addsubjects(request):
+    context = {'success': False}
+
+    if request.method == "POST":
+        code = request.POST.get('code')
+        name = request.POST.get('name')
+        stype = request.POST.get('stype')
+        sem = request.POST.get('sem')
+        credits = request.POST.get('credits')
+
+        ins = Subjects(code=code, name=name, stype=stype, sem=sem, credits=credits)
+        ins.save()
+        context['success'] = True
+
+    allsubjects = Subjects.objects.all()
+    context ={'addsubjects':allsubjects} 
+    return render(request, 'addsubjects.html', context)
+
+
+def delete_subjects(request, pk):
+    subject = Subjects.objects.filter(pk=pk)
     if request.method == 'POST':
-        subject = Subjects.objects.get(subjectid=subjects_id)
         subject.delete()
         return redirect('addsubjects')
-    else:
-        # Handle GET request if necessary
-        pass
-
-def delete_instructor(request, instructor_id):
-    if request.method == 'POST':
-        ins =  Instructor.objects.get(instructorid=instructor_id)
-        ins.delete()
-        return redirect('addinstructor')
-    else:
-        # Handle GET request if necessary
-        pass
-
-
-def theory(request):
-    allteach = Instructor.objects.all()
-    theory_courses = Subjects.objects.filter(type='theory')
-    context = {
-        'addteacher': allteach,
-        'theory_courses': theory_courses
-    }
-    return render(request, 'theory.html', context)
+    
 
 def addinstructor(request):
     context = {'success': False}
@@ -76,23 +75,25 @@ def addinstructor(request):
     context['addinstructor'] = allinst
     return render(request, 'addinstructor.html', context)
 
-def addsubjects(request):
-    context = {'success': False}
+def delete_instructor(request, instructor_id):
+    if request.method == 'POST':
+        ins =  Instructor.objects.get(instructorid=instructor_id)
+        ins.delete()
+        return redirect('addinstructor')
+    else:
+        # Handle GET request if necessary
+        pass
 
-    if request.method == "POST":
-        code = request.POST.get('code')
-        name = request.POST.get('name')
-        type = request.POST.get('type')
-        sem = request.POST.get('sem')
-        credits = request.POST.get('credits')
 
-        ins = Subjects(code=code, name=name, type=type, sem=sem, credits=credits)
-        ins.save()
-        context['success'] = True
+def theory(request):
+    allteach = Instructor.objects.all()
+    theory_courses = Subjects.objects.filter(stype='theory')
+    context = {
+        'addteacher': allteach,
+        'theory_courses': theory_courses
+    }
+    return render(request, 'theory.html', context)
 
-    allsubjects = Subjects.objects.all()
-    context ={'addsubject':allsubjects} 
-    return render(request, 'addsubjects.html', context)
 
 
 def room(request):

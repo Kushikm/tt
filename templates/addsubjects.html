@@ -33,7 +33,7 @@
 
             <div class="form-group">
                 <label for="designation">Subject type</label>
-                <select class="form-control form-control-sm" name="type" >
+                <select class="form-control form-control-sm" name="stype" >
                   <option disabled selected>type</option>
                     <option>Practical</option>
                     <option>Theory</option>
@@ -93,12 +93,12 @@
             </thead>
             <div> 
                 <tbody>
-                    {% for subject in addsubject %}
+                    {% for subject in addsubjects %}
                     <tr>
                       <th scope="row">{{ forloop.counter }}</th>
                       <td>{{ subject.code }}</td>
                       <td>{{ subject.name }}</td>
-                      <td>{{ subject.type }}</td>
+                      <td>{{ subject.stype }}</td>
                       <td>{{ subject.sem }}</td>
                       <td>{{ subject.credits }}</td>
                       <td>
