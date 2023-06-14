@@ -87,10 +87,10 @@ def delete_instructor(request, instructor_id):
 
 def theory(request):
     allteach = Instructor.objects.all()
-    theory_courses = Subjects.objects.filter(stype='theory')
+    theory_courses = Subjects.objects.filter(stype='Theory')
     context = {
         'addteacher': allteach,
-        'theory_courses': theory_courses
+        'theorycourses': theory_courses,
     }
     return render(request, 'theory.html', context)
 
