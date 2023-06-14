@@ -87,7 +87,7 @@ def delete_instructor(request, instructor_id):
 
 def theory(request):
     allteach = Instructor.objects.all()
-    theory_courses = Subjects.objects.filter(type='theory')
+    theory_courses = Subjects.objects.filter(stype='theory')
     context = {
         'addteacher': allteach,
         'theory_courses': theory_courses
