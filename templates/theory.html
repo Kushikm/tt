@@ -70,12 +70,15 @@
        <div class="container my-3" style="width:400px">
         <select class="form-control form-control-sm"style="margin-top:70px" >
           <option disabled selected>Select Teacher</option>
-          {% for  cn in addclass  %}
-          <option >{{cn.classnum}}</option>
+          {% for  t in addteacher  %}
+          <option >{{t.name}}</option>
           {% endfor %}
         </select>
         <select class="form-control form-control-sm " style="margin-top:30px">
-          <option>Select course</option>
+          <option disabled selected>Select Course</option>
+          {% for c in theory_courses %}
+          <option>{{c.code}}</option>
+          {% endfor %}
         </select>
         <button type="submit" class="btn btn-primary" style="margin-top:30px;">Allot</button>
        </div>
@@ -97,7 +100,7 @@
               </tr>
             </thead>
             <tbody>
-              <tbody>
+              
               
                 <tr>
                   <th scope="row">1</th>
