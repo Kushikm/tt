@@ -26,7 +26,7 @@ def delete_classroom(request, classroom_id):
 
 def delete_subjects(request, subjects_id):
     if request.method == 'POST':
-        room = Subjects.objects.get(id=subjects_id)
+        room = Subjects.objects.get(codeid=subjects_id)
         room.delete()
         return redirect('addsubjects')
     else:
@@ -35,7 +35,7 @@ def delete_subjects(request, subjects_id):
 
 def delete_instructor(request, instructor_id):
     if request.method == 'POST':
-        ins = Instructor.objects.get(id=instructor_id)
+        ins =  Instructor.objects.get(instructorid=instructor_id)
         ins.delete()
         return redirect('addinstructor')
     else:

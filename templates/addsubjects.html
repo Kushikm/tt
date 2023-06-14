@@ -97,7 +97,7 @@
                       <td>{{ subjects.sem }}</td>
                       <td>{{ subjects.credits }}</td>
                       <td>
-                        <form action="/deletesubjects/{{ subjects.id }}" method="post">
+                        <form action="" method="post">
                           {% csrf_token %}
                           <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
                         </form>
