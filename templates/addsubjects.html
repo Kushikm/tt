@@ -20,18 +20,19 @@
             </div>
             <div class="form-group">
               <label for="name">Subject code</label>
-              <input type="text" class="form-control" id="instructorid" name="code" >
+              <input type="text" class="form-control" id="instructorid" name="code" placeholder="RCSL01">
             </div>   
 
             
             <div class="form-group">
               <label for="name">Subject Name</label>
-              <input type="text" class="form-control" id="name" name="name" >
+              <input type="text" class="form-control" id="name" name="name" placeholder="name">
             </div>
 
             <div class="form-group">
                 <label for="designation">Subject type</label>
-                <select class="form-control form-control-sm" name="type">
+                <select class="form-control form-control-sm" name="type" >
+                  <option disabled selected>type</option>
                     <option>Practical</option>
                     <option>Theory</option>
                    
@@ -40,6 +41,7 @@
                 <div class="form-group">
                     <label for="designation">Semester</label>
                     <select class="form-control form-control-sm" name="sem">
+                      <option disabled selected>sem</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
@@ -53,6 +55,7 @@
                     <div class="form-group">
                         <label for="designation">Credits</label>
                         <select class="form-control form-control-sm" name="credits">
+                          <option disabled selected>credits</option>
                             <option>1</option>
                             <option>1.5</option>
                             <option>2</option>
@@ -88,14 +91,14 @@
             </thead>
             <div> 
                 <tbody>
-                    {% for subjects in addsubjects %}
+                    {% for subject in addsubject %}
                     <tr>
                       <th scope="row">{{ forloop.counter }}</th>
-                      <td>{{ subjects.code }}</td>
-                      <td>{{ subjects.name }}</td>
-                      <td>{{ subjects.type }}</td>
-                      <td>{{ subjects.sem }}</td>
-                      <td>{{ subjects.credits }}</td>
+                      <td>{{ subject.code }}</td>
+                      <td>{{ subject.name }}</td>
+                      <td>{{ subject.type }}</td>
+                      <td>{{ subject.sem }}</td>
+                      <td>{{ subject.credits }}</td>
                       <td>
                         <form action="" method="post">
                           {% csrf_token %}

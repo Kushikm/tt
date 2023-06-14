@@ -18,7 +18,7 @@ urlpatterns = [
     path('addinstructor/',views.addinstructor,name="addinstructor"),
     path('addsubjects',views.addsubjects,name="addsubjects"),
     path('deleteclassroom/<int:classroom_id>/', delete_classroom, name='delete-classroom'),
-    path('deletesubjects/<int:subjects_id>/', delete_subjects, name='delete-subjects'),
+    path('deletesubjects/<str:subjects_id>/', delete_subjects, name='delete-subjects'),
     #allotment paths
     path('deleteinstructor/<str:instructor_id>/', delete_instructor, name='delete-instructor'),
 
