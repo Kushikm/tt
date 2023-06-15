@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from home.models import Classroom, Instructor, Subjects
+from home.models import Classroom, Instructor, Subjects,Theory
 
 def home(request):
     return render(request, 'home.html')
@@ -87,6 +87,28 @@ def delete_instructor(request, instructor_id):
 
 
 def theory(request):
+    context = {'success': False}
+
+    if request.method == "POST":
+        subject_code = request.POST.get('subject_code')
+        teacher_name = request.POST.get('teacher_name')
+         
+        subject = Subject.objects.get(code=subject_code)
+        teacher = Teacher.objects.get(name=teacher_name)
+
+        ins = Theory(
+                subject_code=subject_code,
+                teacher_name=teacher_name,
+                teacher_id=teacher.id,
+                teacher_designation=teacher.designation,
+                subject_name=subject.name,
+                # Set other fields as needed
+            )
+        ins.save()
+        context['success'] = True
+ 
+
+
     allteach = Instructor.objects.all()
     theory_courses = Subjects.objects.filter(stype='Theory')
     context = {

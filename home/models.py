@@ -29,3 +29,14 @@ class Classroom(models.Model):
 
     def __str__(self):
         return self.classnum
+
+class Theory(models.Model):
+    teacher_id = models.IntegerField()
+    teacher_name = models.CharField(max_length=100)
+    teacher_designation = models.CharField(max_length=100)
+    subject_name = models.CharField(max_length=100)
+    subject_code = models.CharField(max_length=10, primary_key=True)
+    
+
+    def __str__(self):
+        return f"{self.subject_code} - {self.teacher_name}"        
