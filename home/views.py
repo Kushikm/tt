@@ -85,35 +85,34 @@ def delete_instructor(request, instructor_id):
         # Handle GET request if necessary
         pass
 
-
 def theory(request):
     context = {'success': False}
 
     if request.method == "POST":
         subject_code = request.POST.get('subject_code')
         teacher_name = request.POST.get('teacher_name')
-         
+        instructor = Instructor.objects.get(name=teacher_name)
         subject = Subjects.objects.get(code=subject_code)
-        teacher = Instructor.objects.get(name=teacher_name)
-
-        ins = Theory(
-                subject_code=subject_code,
-                teacher_name=teacher_name,
-                teacher_id=teacher.id,
-                teacher_designation=teacher.designation,
-                subject_name=subject.name,
-                # Set other fields as needed
-            )
-        ins.save()
+       
+        theory_allotment = Theory(
+            subject_code=subject_code,
+            teacher_name=teacher_name,
+            instructor=instructor,
+            subject=subject,
+        )
+        theory_allotment.save()
         context['success'] = True
- 
 
-
+        
+    
     allteach = Instructor.objects.all()
     theory_courses = Subjects.objects.filter(stype='Theory')
-    context = {
+    theory_allotments = Theory.objects.all().select_related('instructor', 'subject')
+    
+    context ={
         'addteacher': allteach,
         'theorycourses': theory_courses,
+        'theory_allotments': theory_allotments,
     }
     return render(request, 'theory.html', context)
 

@@ -5,19 +5,22 @@
 
     
        <div class="container my-3" style="width:400px">
-        <select class="form-control form-control-sm"style="margin-top:70px" >
+        <form action="/theory" method="post">
+          {%csrf_token%}
+        <select class="form-control form-control-sm"style="margin-top:70px" name="teacher_name">
           <option disabled selected>Select Teacher</option>
           {% for  t in addteacher  %}
           <option >{{t.name}}</option>
           {% endfor %}
         </select>
-        <select class="form-control form-control-sm " style="margin-top:30px">
+        <select class="form-control form-control-sm " style="margin-top:30px"  name="subject_code">
           <option disabled selected>Select Course</option>
           {% for c in theorycourses %}
           <option>{{c.code}}</option>
           {% endfor %}
         </select>
         <button type="submit" class="btn btn-primary" style="margin-top:30px;">Allot</button>
+      </form>
        </div>
 
 
@@ -37,13 +40,16 @@
               </tr>
             </thead>
             <tbody>
-              
-              
-                <tr>
-                  <th scope="row">1</th>
-                  <td>name</td>
-                  
-                </tr>
+              {% for allotment in theory_allotments %}
+              <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ allotment.instructor.instructorid }}</td>
+                  <td>{{ allotment.instructor.name }}</td>
+                  <td>{{ allotment.instructor.designation }}</td>
+                  <td>{{ allotment.subject.name }}</td>
+                  <td>{{ allotment.subject.code }}</td>
+              </tr>
+          {% endfor %}
              
               </tbody>
               

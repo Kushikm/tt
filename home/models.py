@@ -31,12 +31,13 @@ class Classroom(models.Model):
         return self.classnum
 
 class Theory(models.Model):
-    teacher_id = models.IntegerField()
     teacher_name = models.CharField(max_length=100)
-    teacher_designation = models.CharField(max_length=100)
-    subject_name = models.CharField(max_length=100)
     subject_code = models.CharField(max_length=10, primary_key=True)
-    
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE,default='2')
+    subject = models.ForeignKey(Subjects, on_delete=models.CASCADE,default='1')
 
     def __str__(self):
-        return f"{self.subject_code} - {self.teacher_name}"        
+        return f"{self.subject_code} - {self.teacher_name}"
+    
+
+           
