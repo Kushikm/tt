@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{%block title%}timetable{%endblock title%}
+{% block body %}
+
+<div class="container my-5" style="width:400px">
+    <form action="/theory" method="post">
+      {%csrf_token%}
+      <div class="form-group">
+        <label for="designation">Select Semester</label>
+        <select class="form-control form-control-sm" name="sem">
+          <option disabled selected>sem</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+           
+        </select>
+        </div>
+    
+    <button type="submit" class="btn btn-primary" style="margin-top:30px;">GENERATE</button>
+  </form>
+   </div>
+
+   <h2 class="text-center">Generated Time Table</h2>
+
+   <table class="table  table-bordered my-5">
+    <thead>
+        <tr>
+          <th scope="col">Time/Days</th>
+          <th scope="col">8.00:9.00</th>
+          <th scope="col">9.00:10.00</th>
+          <th scope="col">10:30:11:30</th>
+          <th scope="col">11:30:12:30</th>
+          <th scope="col">2.00:3.00</th>
+          <th scope="col">3.00:4.00</th>
+          <th scope="col">4.00:5.00</th>
+        </tr>
+      </thead>
+      
+  </table>
+
+   {% endblock body %}

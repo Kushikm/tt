@@ -3,7 +3,8 @@ from home.models import Classroom, Instructor, Subjects,Theory
 
 def home(request):
     return render(request, 'home.html')
-
+def timetable(request):
+    return render(request, 'timetable.html')
 def addclassroom(request):
     context = {'success': False}
     if request.method == "POST":

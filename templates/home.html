@@ -8,12 +8,16 @@
               <div class="media-body" style="margin-top:250px;margin-left:200px">
                 <h2 class="mt-0">TIME TABLE SCHEDULER<h5>(Genetic Algorithm)</h5></h2>
                 <p> Generating a timetable using a genetic algorithm involves defining a chromosome representation for potential solutions. Fitness evaluation considers constraints like conflicts, course requirements, and preferences. The algorithm iteratively evolves the population through selection, crossover, and mutation until an optimal timetable solution is obtained.</p>
-                <button type="submit" class="btn btn-primary">GENERATE TIMETABLE</button>
+                <div class="crdbtn">
+                  <a href="{% url 'timetable' %}" class="btn btn-primary">Generate Timetable</a>
+              
+                </div>
               </div>
               
             </div>
            
           </div>
+         
     
 
     <!-- Optional JavaScript -->
