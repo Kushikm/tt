@@ -93,8 +93,8 @@ def theory(request):
         subject_code = request.POST.get('subject_code')
         teacher_name = request.POST.get('teacher_name')
          
-        subject = Subject.objects.get(code=subject_code)
-        teacher = Teacher.objects.get(name=teacher_name)
+        subject = Subjects.objects.get(code=subject_code)
+        teacher = Instructor.objects.get(name=teacher_name)
 
         ins = Theory(
                 subject_code=subject_code,
