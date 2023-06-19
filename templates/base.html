@@ -42,12 +42,21 @@
           <li class="nav-item {% block addinstructoractive %}{% endblock addinstructoractive %}">
             <a class="nav-link" href="addinstructor/">AddInstructor</a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link {% block addtimingsactive %}{% endblock addtimingsactive %}" href="/addtimings">AddTimings</a>
+          </li>
           
           <li class="nav-item  {% block addsubjectsactive %}{% endblock addsubjectsactive %}"><a class="nav-link" href="/addsubjects">AddSubjects</a>
           </li>"
         </li>
         <li class="nav-item ">
           <a class="nav-link {% block addclassroomactive %}{% endblock addclassroomactive %}" href="/addclassroom">AddClassroom</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link {% block adddepartmentactive %}{% endblock adddepartmentactive %}" href="/adddepartment">AddDepartment</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link {% block addsectionactive %}{% endblock addsectionactive %}" href="/addsection">AddSection</a>
         </li>
         <li class="nav-item dropdown {% block allotmentactive %}{% endblock allotmentactive %} ">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

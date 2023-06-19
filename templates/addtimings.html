@@ -1,0 +1,86 @@
+
+{% extends "base.html" %}
+{% block addtimingsactive %}active{% endblock addtimingsactive %}
+{%block title%}addtimings{%endblock title%}
+{% block body %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success: </strong> Added 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+
+
+   <div class="container my-3">
+    <h2 class="text-center">Add Timings</h2>
+    <form action="/addtimings" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="title">Timing id</label>
+          <input type="text" class="form-control" name="pid" id="title" placeholder="id">
+        </div>
+        <div class="form-group">
+            <label for="time">Time</label>
+            <select class="form-control" id="time" name="time">
+                <option disabled selected>Select Timeslot</option>
+                {% for slot in timess %}
+                <option value="{{ slot.0 }}">{{ slot.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="day">Day</label>
+            <select class="form-control" id="day" name="day">
+                <option disabled selected>Select Day</option>
+                {% for day in dayss %}
+                <option value="{{ day.0 }}">{{ day.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">ADD</button>
+      </form>
+   </div>
+    
+   <div class="container my-5">
+    <h5>TIMINGS LISTS</h5>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Timing id</th>
+            <th scope="col">Day</th> 
+            <th scope="col">Time</th> 
+            
+          </tr>
+        </thead>
+        <div>
+          <tbody>
+            {% for meeting_time in all_times %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ meeting_time.pid }}</td>
+                <td>{{ meeting_time.time }}</td>
+                <td>{{ meeting_time.day }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">No meeting times available.</td>
+            </tr>
+        {% endfor %}
+          </tbody>
+          
+        </div>
+          
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+   
+    
+
+    {% endblock body %}

@@ -3,9 +3,9 @@
 {% block body %}
 
 <div class="container my-5" style="width:400px">
-    <form action="/theory" method="post">
+    <form action="" method="post">
       {%csrf_token%}
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="designation">Select Semester</label>
         <select class="form-control form-control-sm" name="sem">
           <option disabled selected>sem</option>
@@ -18,7 +18,7 @@
             <option>8</option>
            
         </select>
-        </div>
+        </div>-->
     
     <button type="submit" class="btn btn-primary" style="margin-top:30px;">GENERATE</button>
   </form>
@@ -26,7 +26,7 @@
 
    <h2 class="text-center">Generated Time Table</h2>
 
-   <table class="table  table-bordered my-5">
+   <!--<table class="table  table-bordered my-5">
     <thead>
         <tr>
           <th scope="col">Time/Days</th>
@@ -39,7 +39,55 @@
           <th scope="col">4.00:5.00</th>
         </tr>
       </thead>
-      
-  </table>
+     <tbody>
+        {% for day_data in timetable_data %}
+    <tr>
+      <td>{{ day_data.day }}</td>
+      {% for slots_data in day_data.periods %}
+        <td>
+          {% for subject in slots_data %}
+            {% if subject %}
+              {{ subject }}
+            
+            {% endif %}
+          {% endfor %}
+        </td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+    </tbody>-->
+    
+{% for section in sections %}
+<h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+    <table class="table2">
+      <colgroup>
+        <col >
+        <col >
+        <col>
+        <col>
+        <col >
+        <col>
+      </colgroup>
+      <tr>
+        <th>Class #</th>
+        <th>Course</th>
+        <th>Venue(Block- Room)</th>
+        <th>Instructor</th>
+        <th>Class Timing</th>
+      </tr>
+      {% for class in schedule %}
+        {% if class.section == section.section_id %}
+        <tr>
+          <th>{{class.section_id}}</th>
+          <td>{{class.course}}</td>
+          <td>{{class.room}}</td>
+          <td>{{class.instructor}}</td>
+          <td>{{class.meeting_time}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+
+{% endfor %}
 
    {% endblock body %}

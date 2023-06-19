@@ -14,10 +14,13 @@ urlpatterns = [
 
     path('home',views.home,name="home"),
     path('',views.home,name="home"),
-     path('timetable_generation/', views.timetable, name='timetable'),
+    path('timetable_generation/', views.timetable, name='timetable'),
     path('addclassroom',views.addclassroom,name="addclassroom"),
+    path('addtimings', views.addtimings, name='addtimings'),
+    path('adddepartment', views.adddepartment, name='adddepartment'),
     path('addinstructor/',views.addinstructor,name="addinstructor"),
     path('addsubjects',views.addsubjects,name="addsubjects"),
+     path('addsection',views.addsection,name="addsection"),
     path('deleteclassroom/<int:classroom_id>/', delete_classroom, name='delete-classroom'),
     path('deletesubjects/<str:subjects_code>/', delete_subjects, name='delete-subjects'),
     #allotment paths

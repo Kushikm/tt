@@ -27,8 +27,8 @@
 
             
             <div class="form-group">
-              <label for="name">Subject Name</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="name">
+              <label for="sname">Subject Name</label>
+              <input type="text" class="form-control" id="sname" name="sname" placeholder="name">
             </div>
 
             <div class="form-group">
@@ -67,8 +67,19 @@
                            
                         </select>
                         </div>
-            
-              
+                        <div class="form-group">
+                          <label for="max_students">Max Num of Students</label>
+                          <input type="text" class="form-control" name="max_students" id="max_students" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                          <label for="title">Instructor</label>
+                          <select class="form-control" name="instructors[]" id="title">
+                            <option disabled selected>Select Instructor</option>
+                            {% for choice in allins %}
+                                <option value="{{ choice.name }}" >{{ choice.name}}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
 
             
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -87,7 +98,9 @@
                 <th scope="col">Subject stype</th>
                 <th scope="col">Semester</th>
                 <th scope="col">Credits</th>
-                <th scope="col">Actions</th> 
+                <th scope="col">Max Num of Students</th> 
+                <th scope="col">Instructor</th>
+                <th scope="col">Actions</th>
                 
               </tr>
             </thead>
@@ -96,10 +109,17 @@
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ subjects.code }}</td>
-            <td>{{ subjects.name }}</td>
+            <td>{{ subjects.sname }}</td>
             <td>{{ subjects.stype}}</td>
             <td>{{ subjects.sem }}</td>
             <td>{{ subjects.credits}}</td>
+            <td>{{ subjects.max_students}}</td>
+            <td>
+              {% for instructor in subjects.instructors.all %}
+                {{ instructor.name }}{% if not forloop.last %}, {% endif %}
+             
+              {% endfor %}
+            </td>
             <td>
               <form action="{% url 'delete-subjects' subjects.code %}" method="post">
                 {% csrf_token %}

@@ -3,19 +3,24 @@
 {%block title%}room{%endblock title%}
 {% block body %}
 
-    <div class="container my-3" style="width:400px">
-        <select class="form-control form-control-sm"style="margin-top:70px" >
-          <option disabled selected>Select Semester</option>
-        </select>
-        <select class="form-control form-control-sm " style="margin-top:30px">
-            <option disabled selected>Select Room Number</option>
-            {% for  cn in addclass  %}
-            <option>{{cn.classnum}}</option>
-            {% endfor %}
-        </select>
-        <button type="submit" class="btn btn-primary" style="margin-top:30px;">Allot</button>
-       </div>
-       
+<div class="container my-3" style="width: 400px">
+  <form action="/room" method="post">
+    {% csrf_token %}
+    <select class="form-control form-control-sm" style="margin-top: 70px" name="semester_number">
+      <option disabled selected>Select Semester</option>
+      {% for sem in allsem %}
+        <option>{{ sem }}</option>
+      {% endfor %}
+    </select>
+    <select class="form-control form-control-sm" style="margin-top: 30px" name="room_name">
+      <option disabled selected>Select Room Number</option>
+      {% for clsnum in allclsnum %}
+        <option>{{ clsnum }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Allot</button>
+  </form>
+</div>
 
        <div class="container my-5">
         <h5>Alloted List</h5>
@@ -30,13 +35,13 @@
             </thead>
             <tbody>
               <tbody>
-              
+                {% for allotment in room_allot %}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>name</td>
-                  
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ allotment.semester_number}}</td>
+                  <td>{{ allotment.room_name }}</td>
                 </tr>
-             
+                {% endfor %}
               </tbody>
               
             </div>
