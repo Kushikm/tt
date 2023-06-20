@@ -464,7 +464,14 @@ def addtimings(request):
 
     return render(request,'addtimings.html',context)
 
-
+def delete_timimg(request, p_id):
+    if request.method == 'POST':
+        ins =  MeetingTime.objects.get(pid=p_id)
+        ins.delete()
+        return redirect('addtimings')
+    else:
+        # Handle GET request if necessary
+        pass
 
 def practical(request):
     return render(request, 'practical.html')
@@ -493,3 +500,12 @@ def addsection(request):
         'engineering_branches':engineering_branches,
     }   
     return render(request,'addsection.html',context)
+
+def delete_section(request, p_id):
+    if request.method == 'POST':
+        ins =  Section.objects.get(section_id=p_id)
+        ins.delete()
+        return redirect('addsection')
+    else:
+        # Handle GET request if necessary
+        pass

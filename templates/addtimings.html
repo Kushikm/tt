@@ -64,11 +64,16 @@
                 <td>{{ meeting_time.pid }}</td>
                 <td>{{ meeting_time.time }}</td>
                 <td>{{ meeting_time.day }}</td>
+
+                <td>
+                <form action="{% url 'delete-timimg' meeting_time.pid %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
+                </form>  
+              </td>  
             </tr>
-        {% empty %}
-            <tr>
-                <td colspan="3">No meeting times available.</td>
-            </tr>
+        
+              
         {% endfor %}
           </tbody>
           

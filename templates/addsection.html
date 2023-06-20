@@ -59,7 +59,12 @@
               <td>{{ a.section_id }}</td>
               <td>{{ a.department.depname }}</td>
               <td>{{ a.num_class_in_week }}</td>
-              
+              <td>
+                <form action="{% url 'delete-section' a.section_id  %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm" style="background-color:black">Delete</button>
+                </form>  
+              </td> 
             </tr>
             {% endfor %}
           </tbody>

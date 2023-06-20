@@ -22,9 +22,12 @@ urlpatterns = [
     path('addsubjects',views.addsubjects,name="addsubjects"),
      path('addsection',views.addsection,name="addsection"),
     path('deleteclassroom/<int:classroom_id>/', delete_classroom, name='delete-classroom'),
+    path('deletesection/<str:p_id>/', views.delete_section, name='delete-section'),
     path('deletesubjects/<str:subjects_code>/', delete_subjects, name='delete-subjects'),
+     path('deletetimimgs/<str:p_id>/', views.delete_timimg, name='delete-timimg'),
     #allotment paths
     path('deleteinstructor/<str:instructor_id>/', delete_instructor, name='delete-instructor'),
+    
      path('mastertime/', views.mastertime, name='mastertime'),
 
 
