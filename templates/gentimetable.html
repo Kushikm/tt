@@ -1,6 +1,14 @@
-{% load static %}
+
+        
+{% extends "base.html" %}
+
+{%block title%}mastertimetable{%endblock title%}
+{% block body %}
 <html lang="en">
 <head>
+    <!-- Head content here -->
+</head>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Generate Timetable</title>
@@ -29,129 +37,6 @@
             html2pdf().from(invoice).set(opt).save();
         })
 }</script>
-    <style>
-
-      *{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-
-}
-
-html{
-	scroll-behavior: smooth;
-}
-
-a{
-	text-decoration:none;
-}
-
-h1, h2, h3, h4, h5{
-    text-align: center;
-    font-family: times new roman;
-}
-
-button
-{
-	border-style:none;
-}
-.main
-{
-	max-width: 1200px;
-	height: auto;
-	margin:0 auto;
-}
-
-form {
-	margin-top: 3%;
-	margin-left: 18%;
-	margin-right: 12%;
-}
-
-form fieldset{
-	padding: 50px;
-	border-width: 25px;
-	border-style: ridge;
-	border-color: #257a7a;
-	box-shadow: 6px 13px 13px 0px black;
-	background-color: #fff;
-
-}
-
-.secHead{
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 120px;
-	color:#3e4242;
-	font-size: 1.8rem;
-}
-
-.table2{
-    margin-bottom: 100px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.table2 {
-
-  border: 25px ridge;
-  border-color: #5a5a5a;
-  box-shadow: 6px 13px 13px 0px black;
-  background-color: #fff;
-  letter-spacing: 1px;
-  font-size: 1.0rem;
-}
-
-.table2 td, th {
-  border: 1px solid rgb(190,190,190);
-  padding: 10px 20px;
-
-}
-
-.table2 th{
-	color: #5a5a5a;
-	font-weight: bolder;
-}
-
-.table2 td {
-  text-align: center;
-}
-
-.table1{
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  overflow: hidden;
-}
-
-.table1 td, th{
-    border-top: 1px solid #5a5a5a;
-    padding: 10px;
-  }
-
-
-.table1 th{
-    background-color: #5a5a5a;
-    color: #fff;
-  }
-
-.submit{
-	margin-left: auto;
-	color: #fff;
-	background-color: #5a5a5a;
-	border-radius: 3px;
-	padding: 13px 39px;
-	text-align: center;
-	letter-spacing: 0.9px;
-	text-decoration: none;
-	margin-right: auto;
-	line-height: 26px;
-	font-size: 16px;
-	align: center;
-}
-    </style>
-
-</head>
 <body>
 <script type="text/javascript">
         var checkList = document.getElementById('list1');
@@ -174,13 +59,14 @@ form fieldset{
 
     </script>
         <br><br>
-        <div id="timetable">
+
+        <div class="container my-5">
         <h1> Generated Timetable</h1><br>
         {% block content %}
         {% load static %}
         {% for section in sections %}
 <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
-    <table class="table2">
+    <table class="table">
       <colgroup>
         <col>
         <col>
@@ -189,7 +75,7 @@ form fieldset{
         <col>
         <col>
       </colgroup>
-      <tr>
+     <tr>
         <th>Class #</th>
         <th>Course</th>
         <th>Venue(Block- Room)</th>
@@ -208,11 +94,11 @@ form fieldset{
         {% endif %}
       {% endfor %}
     </table>
-
-{% endfor %}
-{% endblock %}
-
-        </div>
+    {% endfor %}
+    {% endblock %}
+ </div>
+ 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="submit" id="download">Download</button>
 </body>
 </html>
+{% endblock body %}

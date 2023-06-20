@@ -220,7 +220,26 @@ def context_manager(schedule):
 def home(request):
     return render(request, 'home.html')
 
+def mastertime(request):
+    # Retrieve the necessary data for the master timetable (time_slots, weekdays, schedule)
+    time_slots = ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
+    weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday']
+    # Retrieve the schedule data based on your application logic
+    schedule = []
+    population = Population(POPULATION_SIZE)
+    generation_num = 0
+    population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+    geneticAlgorithm = GeneticAlgorithm()
+    while population.get_schedules()[0].get_fitness() != 1.0:
+        generation_num += 1
+        print('\n> Generation #' + str(generation_num))
+        population = geneticAlgorithm.evolve(population)
+        population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+        schedule = population.get_schedules()[0].get_classes()
+    
 
+    return render(request, 'mastertime.html', {'schedule': schedule, 'sections': Section.objects.all(),
+                                              'times': MeetingTime.objects.all(),'weekdays': weekdays,'time_slots':time_slots})
 
 
 def timetable(request):
@@ -237,9 +256,11 @@ def timetable(request):
         schedule = population.get_schedules()[0].get_classes()
      # Retrieve all meeting times from the database
       # Create an instance of the Data class
-   
+    weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    time_slots =  ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
+    
     return render(request, 'gentimetable.html', {'schedule': schedule, 'sections': Section.objects.all(),
-                                              'times': MeetingTime.objects.all()})
+                                              'times': MeetingTime.objects.all(),'weekdays': weekdays,'time_slots':time_slots})
 
    
 

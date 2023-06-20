@@ -25,7 +25,7 @@ urlpatterns = [
     path('deletesubjects/<str:subjects_code>/', delete_subjects, name='delete-subjects'),
     #allotment paths
     path('deleteinstructor/<str:instructor_id>/', delete_instructor, name='delete-instructor'),
-
+     path('mastertime/', views.mastertime, name='mastertime'),
 
 
     path('theory',views.theory,name="theory"),

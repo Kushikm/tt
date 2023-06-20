@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{%block title%}mastertimetable{%endblock title%}
+{% block body %}
+<html lang="en">
+<head>
+    <!-- Head content here -->
+</head>
+<body>
+    <div class="container my-5">
+        <h1>Master Timetable</h1>
+        {% for section in sections %}
+<h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+        <table class="table">
+            <tr>
+                <th>Time/Days</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+            </tr>
+            {% for time_slot in time_slots %}
+            <tr>
+                <td>{{ time_slot }}</td>
+                {% for day in weekdays %}
+                <td>
+                    {% for class in schedule %}
+                    {% if class.meeting_time.day == day and class.meeting_time.time == time_slot %}
+                    {{ class.course }} ({{ class.room }} - {{ class.instructor }})<br>
+                    {% endif %}
+                    {% empty %}
+                        -
+                    {% endfor %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+           
+        </table>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock body %}
