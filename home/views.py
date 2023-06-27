@@ -54,30 +54,44 @@ class Schedule:
 
     def initialize(self):
         sections = Section.objects.all()
+        
         for section in sections:
             dept = section.department
             n = section.num_class_in_week
             if n <= len(MeetingTime.objects.all()):
                 courses = dept.courses.all()
                 for course in courses:
+                    stype = course.stype
+                   
                     for i in range(n // len(courses)):
                         crs_inst = course.instructors.all()
-                        newClass = Class(self._classNumb, dept, section.section_id, course)
+                        newClass = Class(self._classNumb, dept, section.section_id, course,stype)
                         self._classNumb += 1
-                        newClass.set_meetingTime(data.get_meetingTimes()[random.randrange(len(data.get_meetingTimes()))])
-                        newClass.set_room(data.get_rooms()[random.randrange(len(data.get_rooms()))])
+                        meeting_times = data.get_meetingTimes()
+                        meeting_rooms=data.get_rooms()
+                        if stype == "Practical":  # Allocate 3-hour time slot for practical subjects
+                            meeting_times = data.get_meetingTimes().filter(duration=3)
+                            meeting_rooms=data.get_rooms().filter(rtype='Lab')
+                        newClass.set_meetingTime(meeting_times[random.randrange(len(meeting_times))])
+                        newClass.set_room(meeting_rooms[random.randrange(len(meeting_rooms))])
                         newClass.set_instructor(crs_inst[random.randrange(len(crs_inst))])
                         self._classes.append(newClass)
             else:
                 n = len(MeetingTime.objects.all())
                 courses = dept.courses.all()
                 for course in courses:
+                    stype = course.stype
                     for i in range(n // len(courses)):
                         crs_inst = course.instructors.all()
-                        newClass = Class(self._classNumb, dept, section.section_id, course)
+                        newClass = Class(self._classNumb, dept, section.section_id, course,stype)
                         self._classNumb += 1
-                        newClass.set_meetingTime(data.get_meetingTimes()[random.randrange(len(data.get_meetingTimes()))])
-                        newClass.set_room(data.get_rooms()[random.randrange(len(data.get_rooms()))])
+                        meeting_times = data.get_meetingTimes()
+                        meeting_rooms=data.get_rooms()
+                        if stype == "Practical":  # Allocate 3-hour time slot for practical subjects
+                            meeting_times = data.get_meetingTimes().filter(duration=3)
+                            meeting_rooms=data.get_rooms().filter(rtype='Lab')
+                        newClass.set_meetingTime(meeting_times[random.randrange(len(meeting_times))])
+                        newClass.set_room(meeting_rooms[random.randrange(len(meeting_rooms))])
                         newClass.set_instructor(crs_inst[random.randrange(len(crs_inst))])
                         self._classes.append(newClass)
 
@@ -160,7 +174,7 @@ class GeneticAlgorithm:
 
 
 class Class:
-    def __init__(self, id, dept, section, course):
+    def __init__(self, id, dept, section, course,stype):
         self.section_id = id
         self.department = dept
         self.course = course
@@ -168,6 +182,8 @@ class Class:
         self.meeting_time = None
         self.room = None
         self.section = section
+        self.stype = stype
+        
 
     def get_id(self): return self.section_id
 
@@ -180,6 +196,9 @@ class Class:
     def get_meetingTime(self): return self.meeting_time
 
     def get_room(self): return self.room
+
+    def get_room(self): return self.stype
+  
 
     def set_instructor(self, instructor): self.instructor = instructor
 
@@ -222,7 +241,7 @@ def home(request):
 
 def mastertime(request):
     # Retrieve the necessary data for the master timetable (time_slots, weekdays, schedule)
-    time_slots = ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
+    time_slots = ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00','2:00 - 5:00','10:15 - 1:15']
     weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday']
     # Retrieve the schedule data based on your application logic
     schedule = []
@@ -257,7 +276,7 @@ def timetable(request):
      # Retrieve all meeting times from the database
       # Create an instance of the Data class
     weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    time_slots =  ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
+    time_slots =  ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00','2:00 - 5:00','10:15 - 1:15']
     
     return render(request, 'gentimetable.html', {'schedule': schedule, 'sections': Section.objects.all(),
                                               'times': MeetingTime.objects.all(),'weekdays': weekdays,'time_slots':time_slots})
@@ -275,8 +294,9 @@ def addclassroom(request):
     if request.method == "POST":
         classnum = request.POST.get('classnum')
         seating_capacity =request.POST.get('seating_capacity')
+        rtype=request.POST.get('rtype')
         if seating_capacity:
-         ins = Classroom(classnum=classnum,seating_capacity =seating_capacity)
+         ins = Classroom(classnum=classnum,seating_capacity =seating_capacity,rtype=rtype)
          ins.save()
          context['success'] = True
     allLists = Classroom.objects.all()
@@ -308,7 +328,9 @@ def addsubjects(request):
         if sname: 
          
          ins = Subjects(code=code, sname=sname, stype=stype, sem=sem, credits=credits,max_students=max_students)
-
+         if stype == "Practical":
+            lab_name = request.POST.get('labName')  # Retrieve lab name from the form
+            ins.lab_name = lab_name
          ins.save()
          for instructor_name in instructors:
             instructor, _ = Instructor.objects.get_or_create(name=instructor_name)
@@ -410,7 +432,7 @@ def adddepartment(request):
          'departallot': departallot,
          'engineering_branches':engineering_branches,
      }
-     return render(request, 'adddepartment.html',context)
+     return render(request,'adddepartment.html',context)
 
 
 def room(request):
@@ -447,10 +469,12 @@ def addtimings(request):
         pid=request.POST.get('pid')
         time=request.POST.get('time')
         day=request.POST.get('day')
+        duration=request.POST.get('duration')
         all_times=MeetingTime(
             pid=pid,
             time=time,
             day=day,
+            duration=duration,
         )
         all_times.save()
     all_times=MeetingTime.objects.all()    

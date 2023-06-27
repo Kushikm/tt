@@ -28,10 +28,10 @@
         </div>
         <div class="form-group">
             <label for="title">Course</label>
-            <select class="form-control form-control-sm"style="margin-bottom:4px" name="courses[]">
+            <select class="form-control form-control-sm"style="margin-bottom:4px" name="courses[]" multiple>
             <option disabled selected>Select Course</option>
             {% for  course in allcourses  %}
-            <option value="{{ course.pk }}">{{course.name}}</option>
+            <option value="course.pk">{{course.sname}}</option>
             {% endfor %}
           </select>
         </div>
@@ -58,7 +58,7 @@
                   <td>{{ department.depname }}</td>
                   <td>
                       {% for course in department.courses.all %}
-                          {{ course.name }}<br>
+                          {{ course.sname }}<br>
                       {% endfor %}
                   </td>
               </tr>

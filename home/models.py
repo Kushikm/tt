@@ -10,6 +10,8 @@ time_slots = (
       ('10:30 - 11:30', '10:30 - 11:30'),
       ('11:30 - 12:30', '11:30 - 12:30'),
       ('2:00 - 3:00', '2:00 - 3:00'),
+      ('2:00 - 5:00', '2:00 - 5:00'),
+      ('10:15 - 1:15', '10:15 - 1:15'),
       ('3:00 - 4:00', '3:00 - 4:00'),
       ('4:00 - 5:00', '4:00 - 5:00'),
      )
@@ -38,12 +40,14 @@ class Subjects(models.Model):
     credits = models.CharField(max_length=20, default='1')
     max_students = models.IntegerField(default=0)
     instructors = models.ManyToManyField(Instructor,max_length=100)
+    lab_name = models.CharField(max_length=100, null=True, blank=True)  # New field for lab name
     def __str__(self):
         return self.sname
 
 class Classroom(models.Model):
     classnum = models.CharField(max_length=30)
     seating_capacity = models.IntegerField(default=0)
+    rtype=models.CharField(max_length=20, default='Theory', null=True)
     def __str__(self):
         return self.classnum
 
@@ -101,6 +105,7 @@ class Department(models.Model):
 class MeetingTime(models.Model):
     pid = models.CharField(max_length=4, primary_key=True)
     time = models.CharField(max_length=50, choices=time_slots, default='11:30 - 12:30')
+    duration = models.PositiveIntegerField(default=1)
     day = models.CharField(max_length=15, choices=DAYS_OF_WEEK)
 
     def __str__(self):
