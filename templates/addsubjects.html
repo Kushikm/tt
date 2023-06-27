@@ -33,12 +33,24 @@
 
             <div class="form-group">
                 <label for="designation">Subject type</label>
-                <select class="form-control form-control-sm" name="stype" >
+                <select class="form-control form-control-sm" name="stype" id="subjectType">
                   <option disabled selected>type</option>
                     <option>Practical</option>
                     <option>Theory</option>
                    
                 </select>
+                </div>
+                
+                <div id="labNameContainer" class="form-group" style="display: none; margin-left: 50px">
+                  <label for="labName">Lab Name</label>
+                  <select class="form-control" id="labName" name="labName">
+                    <option disabled selected>Select Lab Name</option>
+                    <!-- Add options for lab names here -->
+                    <option value="Lab 1">SS Lab</option>
+                    <option value="Lab 2">Linux Lab</option>
+                    <option value="Lab 3">java Lab</option>
+                    <!-- Add more options as needed -->
+                  </select>
                 </div>
                 <div class="form-group">
                     <label for="designation">Semester</label>
@@ -73,7 +85,7 @@
                         </div>
                         <div class="form-group">
                           <label for="title">Instructor</label>
-                          <select class="form-control" name="instructors[]" id="title">
+                          <select class="form-control" name="instructors[]" id="title" multiple>
                             <option disabled selected>Select Instructor</option>
                             {% for choice in allins %}
                                 <option value="{{ choice.name }}" >{{ choice.name}}</option>
@@ -136,9 +148,21 @@
                   
             </div>    
 
-    
-         
-    
+            
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var subjectType = document.getElementById('subjectType');
+      var labNameContainer = document.getElementById('labNameContainer');
+
+      subjectType.addEventListener('change', function() {
+          if (subjectType.value === 'Practical') {
+              labNameContainer.style.display = 'block';
+          } else {
+              labNameContainer.style.display = 'none';
+          }
+      });
+  });
+</script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
