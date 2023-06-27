@@ -33,7 +33,7 @@ urlpatterns = [
 
     path('theory',views.theory,name="theory"),
     path('room',views.room,name="room"),
-     path('practical',views.practical,name="practical"),
+     
      
 
 ]

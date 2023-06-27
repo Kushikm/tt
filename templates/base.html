@@ -58,20 +58,19 @@
         <li class="nav-item ">
           <a class="nav-link {% block addsectionactive %}{% endblock addsectionactive %}" href="/addsection">AddSection</a>
         </li>
-        <li class="nav-item dropdown {% block allotmentactive %}{% endblock allotmentactive %} ">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Allotment          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item " href="/theory">Theory Classes</a>
-            <a class="dropdown-item " href="/practical">Practical Classes</a>
-            <a class="dropdown-item " href="/room">Classroom</a>  
-        </li>
+        
         
         </ul>
         
         </form>
       </div> 
     </nav>
+
+    <footer>
+
+      <p class="text-center bg-dark text-light fixed-bottom my-0 py-3">
+        Copyright &copy; 2023 | All rights reserved
+    </footer>
 
     {%block body%}
     {% endblock body%}

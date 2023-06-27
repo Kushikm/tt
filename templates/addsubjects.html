@@ -12,10 +12,10 @@
     {% endif %}
 
 
-    <div class= "container my-3">
+    <div class= "container my-3"  id="addInstructorForm">
         <h2 class="text-center">Add Subjects </h2> 
 
-        <form action="/addsubjects" method="post">
+        <form action="/addsubjects" method="post" style="margin-bottom:150px;">
             {%csrf_token%}
             <div class="container">
               
@@ -95,12 +95,17 @@
 
             
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" id="editBtn">Edit Subjects</button>
           </form>
       </div>
 
 
-      <div class="container my-5">
+      <div class="container my-5"  id="instructorList" style="display: none;">
+        <div class="back-btn" style="margin-bottom:30px;">
+          <a href="#" id="backBtn" style="border:2px solid black;text-decoration:none;padding:5px;border-radius:6px"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
         <h5>SUBJECTS LISTS</h5>
+        <div style="border:2px solid black;padding:50px;border-radius:20px 0px 0px 20px;max-height: 300px; overflow-y: auto;">
         <table class="table">
             <thead>
               <tr>
@@ -145,7 +150,7 @@
                 
                  </tbody>
                 </table>
-                  
+              </div>
             </div>    
 
             
@@ -161,6 +166,29 @@
               labNameContainer.style.display = 'none';
           }
       });
+  });
+  document.getElementById('editBtn').addEventListener('click', function() {
+    var addInstructorForm = document.getElementById('addInstructorForm');
+    var instructorList = document.getElementById('instructorList');
+    
+    if (addInstructorForm.style.display === 'none') {
+      addInstructorForm.style.display = 'block';
+      instructorList.style.display = 'none';
+      this.innerHTML = 'Edit Instructor';
+    } else {
+      addInstructorForm.style.display = 'none';
+      instructorList.style.display = 'block';
+      
+    }
+  });
+
+  document.getElementById('backBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    var addInstructorForm = document.getElementById('addInstructorForm');
+    var instructorList = document.getElementById('instructorList');
+    
+    addInstructorForm.style.display = 'block';
+    instructorList.style.display = 'none';
   });
 </script>
 

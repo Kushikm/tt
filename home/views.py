@@ -477,6 +477,7 @@ def addtimings(request):
             duration=duration,
         )
         all_times.save()
+        context['success'] = True
     all_times=MeetingTime.objects.all()    
     timess = time_slots
     dayss = DAYS_OF_WEEK    
@@ -497,8 +498,6 @@ def delete_timimg(request, p_id):
         # Handle GET request if necessary
         pass
 
-def practical(request):
-    return render(request, 'practical.html')
 
 
 
