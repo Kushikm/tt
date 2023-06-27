@@ -65,7 +65,7 @@
           {% if user.is_authenticated %}
           
           <li class="nav-item">
-            <a class="nav-link" href="#">Welcome, {{ user.username }}</a>
+            <a class="nav-link" href="#">Welcome,{{ user.username }}</a>
           </li>
           {% else %}
           <li class="nav-item mr-5" data-toggle="modal">
@@ -74,8 +74,9 @@
           
           {% endif %}
           <li class="nav-item" style="margin-left:3px;">
-            <button type="submit" class="btn btn-primary" style="padding:0px;">
+            <button type="submit" class="btn btn-secondary" style="padding:0px;">
               <a class="nav-link" href="/logout">Logout</a>
+              
             </button>
           </li>
         </ul>
