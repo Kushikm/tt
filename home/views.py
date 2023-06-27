@@ -11,6 +11,8 @@ from .forms import SignUpForm
 
 
 
+
+
 def login_user (request):
 	if request.method == 'POST': #if someone fills out form , Post it 
 		username = request.POST['username']
@@ -31,22 +33,24 @@ def logout_user(request):
 	messages.success(request,('Youre now logged out'))
 	return redirect('login')
  
-def register_user(request):
-	if request.method =='POST':
-		form = SignUpForm(request.POST)
-		if form.is_valid():
-			form.save()
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password1']
-			user = authenticate(username=username, password=password)
-			login(request,user)
-			messages.success(request, ('Youre now registered'))
-			return redirect('login')
-	else: 
-		form = SignUpForm() 
 
-	context = {'form': form}
-	return render(request, 'register.html', context)
+def register_user(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, 'You are now registered')
+            return redirect('login')
+    else:
+        form = SignUpForm()
+
+    context = {'form': form}
+    return render(request, 'register.html', context)
+
 
 POPULATION_SIZE = 9
 NUMB_OF_ELITE_SCHEDULES = 1

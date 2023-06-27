@@ -60,6 +60,7 @@
         </li>
         
         
+          
         <ul class="navbar-nav mr-2">
           {% if user.is_authenticated %}
           <li class="nav-item">
@@ -69,7 +70,7 @@
             <a class="nav-link" href="#">Welcome, {{ user.username }}</a>
           </li>
           {% else %}
-          <li class="nav-item">
+          <li class="nav-item mr-5" data-toggle="modal">
             <a class="nav-link" href="/login">Login</a>
           </li>
           {% endif %}
