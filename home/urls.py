@@ -29,7 +29,7 @@ urlpatterns = [
     path('deleteinstructor/<str:instructor_id>/', delete_instructor, name='delete-instructor'),
     
      path('mastertime/', views.mastertime, name='mastertime'),
-     path('login', views.login_user, name ='login'),
+     path('login/', views.login_user, name ='login'),
     path('', views.register_user, name='register'),
     path('logout', views.logout_user, name='logout'),
 
