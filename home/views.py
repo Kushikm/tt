@@ -118,6 +118,8 @@ class Schedule:
                         if stype == "Practical":  # Allocate 3-hour time slot for practical subjects
                             meeting_times = data.get_meetingTimes().filter(duration=3)
                             meeting_rooms=data.get_rooms().filter(rtype='Lab')
+                        else:  # Allocate 1-hour time slot for theory subjects
+                           meeting_times = data.get_meetingTimes().filter(duration=1)    
                         newClass.set_meetingTime(meeting_times[random.randrange(len(meeting_times))])
                         newClass.set_room(meeting_rooms[random.randrange(len(meeting_rooms))])
                         newClass.set_instructor(crs_inst[random.randrange(len(crs_inst))])
@@ -136,6 +138,8 @@ class Schedule:
                         if stype == "Practical":  # Allocate 3-hour time slot for practical subjects
                             meeting_times = data.get_meetingTimes().filter(duration=3)
                             meeting_rooms=data.get_rooms().filter(rtype='Lab')
+                        else:  # Allocate 1-hour time slot for theory subjects
+                           meeting_times = data.get_meetingTimes().filter(duration=1)    
                         newClass.set_meetingTime(meeting_times[random.randrange(len(meeting_times))])
                         newClass.set_room(meeting_rooms[random.randrange(len(meeting_rooms))])
                         newClass.set_instructor(crs_inst[random.randrange(len(crs_inst))])
