@@ -14,18 +14,15 @@
 <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
         <table class="table">
             <tr>
-                <th>Time/Days</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
+                <th></th>
+                {% for time_slot in time_slots %}
+                <th>{{ time_slot }}</th>
+                {% endfor %}
             </tr>
-            {% for time_slot in time_slots %}
+            {% for day in weekdays %}
             <tr>
-                <td>{{ time_slot }}</td>
-                {% for day in weekdays %}
+                <th>{{ day }}</th>
+                {% for time_slot in time_slots %}
                 <td>
                     {% for class in schedule %}
                     {% if class.meeting_time.day == day and class.meeting_time.time == time_slot %}
