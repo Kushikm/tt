@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="time">Time</label>
-            <select class="form-control" id="time" name="time">
+            <select class="form-control" id="time" name="time" multiple>
                 <option disabled selected>Select Timeslot</option>
                 {% for slot in timess %}
                 <option value="{{ slot.0 }}">{{ slot.1 }}</option>

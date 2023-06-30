@@ -286,12 +286,11 @@ def context_manager(schedule):
 
 
 '''viewss'''
-def home(request):
-    return render(request, 'home.html')
+
 
 def mastertime(request):
     # Retrieve the necessary data for the master timetable (time_slots, weekdays, schedule)
-    time_slots = ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00','2:00 - 5:00','10:15 - 1:15']
+    time_slots = ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
     weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday']
     # Retrieve the schedule data based on your application logic
     schedule = []
@@ -310,7 +309,8 @@ def mastertime(request):
     return render(request, 'mastertime.html', {'schedule': schedule, 'sections': Section.objects.all(),
                                               'times': MeetingTime.objects.all(),'weekdays': weekdays,'time_slots':time_slots})
 
-
+def home(request):
+    return render(request, 'home.html')
 def timetable(request):
     schedule = []
     population = Population(POPULATION_SIZE)
@@ -326,7 +326,7 @@ def timetable(request):
      # Retrieve all meeting times from the database
       # Create an instance of the Data class
     weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    time_slots =  ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00','2:00 - 5:00','10:15 - 1:15']
+    time_slots =  ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
     
     return render(request, 'gentimetable.html', {'schedule': schedule, 'sections': Section.objects.all(),
                                               'times': MeetingTime.objects.all(),'weekdays': weekdays,'time_slots':time_slots})
@@ -517,7 +517,7 @@ def addtimings(request):
 
     if request.method == "POST":
         pid=request.POST.get('pid')
-        time=request.POST.get('time')
+        time=request.POST.getlist('time')
         day=request.POST.get('day')
         duration=request.POST.get('duration')
         all_times=MeetingTime(
