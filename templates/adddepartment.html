@@ -31,7 +31,7 @@
             <select class="form-control form-control-sm"style="margin-bottom:4px" name="courses[]" multiple>
             <option disabled selected>Select Course</option>
             {% for  course in allcourses  %}
-            <option value="course.pk">{{course.sname}}</option>
+            <option value="{{course.pk}}">{{course.sname}}</option>
             {% endfor %}
           </select>
         </div>

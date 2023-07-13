@@ -323,8 +323,7 @@ def timetable(request):
         population = geneticAlgorithm.evolve(population)
         population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
         schedule = population.get_schedules()[0].get_classes()
-     # Retrieve all meeting times from the database
-      # Create an instance of the Data class
+     
     weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     time_slots =  ['8:00 - 9:00', '9:00 - 10:00', '10:30 - 11:30', '11:30 - 12:30', '2:00 - 3:00', '3:00 - 4:00', '4:00 - 5:00']
     
@@ -471,8 +470,11 @@ def adddepartment(request):
             depname=depname,
             
         )
-        departallot.courses.set(courses)
+        
         departallot.save()
+        for cname in courses:
+            cn, _ = Subjects.objects.get_or_create(code=cname)
+            departallot.courses.add(cn)
         context['success'] = True
      engineering_branches = Department.DEPARTMENT_CHOICES
      departallot=Department.objects.all()   

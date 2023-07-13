@@ -25,7 +25,7 @@
                 {% for time_slot in time_slots %}
                 <td>
                     {% for class in schedule %}
-                    {% if class.meeting_time.day == day and time_slot in class.meeting_time.time %}
+                    {% if  class.section == section.section_id and  class.meeting_time.day == day and time_slot in class.meeting_time.time %}
                     {{ class.course }} ({{ class.room }} - {{ class.instructor }})<br>
                     {% endif %}
                     {% empty %}
